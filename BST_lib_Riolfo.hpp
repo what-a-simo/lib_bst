@@ -1,5 +1,5 @@
-#ifndef BST_LIB_RIOLFO_HPP
-#define BST_LIB_RIOLFO_HPP
+#ifndef NODE_HPP
+#define NODE_HPP
 
 class Node {
     private:
@@ -8,9 +8,10 @@ class Node {
         Node* left_child;
         Node* right_child;
     public:
-        Node(int x);
-        Node* insertI(int x);
+        Node(int k);
+        Node* insertR(int k);
+        Node* insertI(int k);
         void inOrder();
 };
 
-#endif // BST_LIB_RIOLFO_HPP
+#endif // NODE_HPP
