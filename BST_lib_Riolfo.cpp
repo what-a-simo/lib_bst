@@ -101,3 +101,13 @@ void Node::inOrder() {
     cout << "[ " << this->data << " ]";
     this->right_child->inOrder();
 }
+
+istream& operator>>(istream& is, Node* node) {
+    is >> node->data;
+    return is;
+}
+
+ostream& operator<<(ostream& os, Node* node) {
+    os << "Data -> " << node->data << " (" << node->count << ")" << endl;
+    return os;
+}
