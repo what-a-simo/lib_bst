@@ -1,6 +1,10 @@
 #ifndef NODE_HPP
 #define NODE_HPP
 
+#include <iostream>
+
+using namespace std;
+
 class Node {
     private:
         int data;
@@ -18,6 +22,8 @@ class Node {
         void inOrder();
         void preOrder();
         void postOrder();
+        friend istream& operator>>(istream& is, Node* node);
+        friend ostream& operator<<(ostream& os, Node* node);
 };
 
 #endif // NODE_HPP

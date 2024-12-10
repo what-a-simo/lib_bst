@@ -176,3 +176,21 @@ void Node::postOrder() {
     this->right_child->postOrder();
     cout << "[ " << this->data << " ]";
 }
+
+istream& operator>>(istream& is, Node* node) {
+    is >> node->data >> node->left_child >> node->right_child;
+    return is;
+}
+
+ostream& operator<<(ostream& os, Node* node) {
+    os << "Data -> " << node->data << " (" << node->count << ")" << endl;
+    if (node->left_child != NULL && node->right_child != NULL) {
+        os << "Left child: " << node->left_child->data << " (" << node->left_child->count << ")" << endl;
+        os << "Right child: " << node->right_child->data << " (" << node->right_child->count << ")" << endl;
+    } else if (node->right_child == NULL) {
+        os << "Left_child: " << node->left_child->data << " (" << node->left_child->count << ")" << endl;
+    } else {
+        os << "Right child: " << node->right_child->data << " (" << node->right_child->count << ")" << endl;
+    }
+    return os;
+}
