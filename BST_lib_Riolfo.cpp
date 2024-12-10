@@ -53,6 +53,38 @@ Node* Node::insertI(int k) {
     return this;
 }
 
+bool Node::isBst() {
+    bool check;
+    bool condition = true;
+    if (this->left_child == NULL || this->right_child == NULL) {
+        if (this->left_child == NULL && this->right_child == NULL) {
+            check = true;
+            return check;
+        } else if (this->left_child == NULL) {
+            check = this->right_child->isBst();
+            condition = false;
+        } else if (this->right_child == NULL) {
+            check = this->left_child->isBst();
+            condition = false;
+        } 
+    }
+    if (condition) {
+        if (this->data > this->left_child->data) {
+            check = this->left_child->isBst();
+            condition = true;
+        }
+        if (this->data < this->right_child->data) {
+            check = this->right_child->isBst();
+            condition = true;
+        }
+        if (this->data < this->left_child->data || this->data > this->right_child->data) {
+            check = false;
+            return check;
+        }
+    }
+    return check;
+}
+
 bool Node::searchR(int k) {
     bool check;
     if (this == NULL) {
@@ -93,6 +125,31 @@ bool Node::searchI(int k) {
     return check;
 }
 
+Node* Node::deleteNode(int k) {
+    if (k == this->data) {
+        if (this->left_child == NULL && this->right_child == NULL) {
+            delete this;
+            return nullptr;
+        } else if (this->left_child == NULL) {
+            this->data = this->right_child->data;
+            this->right_child = nullptr;
+            delete this->right_child;
+            return this;
+        } else if (this->right_child == NULL) {
+            this->data = this->left_child->data;
+            this->left_child = nullptr;
+            delete this->left_child;
+            return this;
+        }
+    }
+    if (k < this->data) {
+        this->left_child = this->left_child->deleteNode(k);
+    } else {
+        this->right_child = this->right_child->deleteNode(k);
+    }
+    return this;
+}
+
 void Node::inOrder() {
     if (this == NULL) {
         return;
@@ -100,4 +157,22 @@ void Node::inOrder() {
     this->left_child->inOrder();
     cout << "[ " << this->data << " ]";
     this->right_child->inOrder();
+}
+
+void Node::preOrder() {
+    if (this == NULL) {
+        return;
+    }
+    cout << "[ " << this->data << " ]";
+    this->left_child->preOrder();
+    this->right_child->preOrder();
+}
+
+void Node::postOrder() {
+    if (this == NULL) {
+        return;
+    }
+    this->left_child->postOrder();
+    this->right_child->postOrder();
+    cout << "[ " << this->data << " ]";
 }
